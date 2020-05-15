@@ -4,10 +4,17 @@ include Makefile.template
 
 PROJECT=template-go
 
+GIT_CERT_IGNORE =
+GIT_CERT_IGNORE_COMMAND =
+ifneq($(GIT_CERT_IGNORE),)
+	GIT_CERT_IGNORE_COMMAND = git config http.sslVerify false
+endif
+
 clean: ## Clean all build/temp folders
 
-configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
-	@echo "Configure and Init the code dependencies"
+configure: #configure-$(SHELL_IS) ## Configure and Init the code dependencies
+	$(GIT_CERT_IGNORE_COMMAND)
+	bash -c 'bash ./.scripts/pre-commit.sh --install'
 
 configure-bash:
 	[ -f .git/hooks/pre-commit ] || ln -s .scripts/pre-commit.sh .git/hooks/pre-commit
