@@ -11,49 +11,6 @@ esac
 
 RUNNING_PATH=$(pwd)
 
-# installing requirements
-echo $* | grep "\-\-install" > /dev/null
-if [[ $? == 0 ]]; then
-    cd $GOPATH
-
-    #
-    # golint
-    #
-    go get -u golang.org/x/lint/golint
-
-
-    #
-    # golanci-lint
-    #
-    curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
-    | sh -s -- -b $(go env GOPATH)/bin \
-    $(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $2}' | awk -F '<' '{print $1}')
-
-    #
-    # goimports
-    #
-    go get golang.org/x/tools/cmd/goimports
-
-    #
-    # gocyclo
-    #
-    go get github.com/fzipp/gocyclo/...
-
-    #
-    # gocritic
-    #
-    go get -u github.com/go-lintpack/lintpack/...
-    go get github.com/go-critic/go-critic/...
-    cd $GOPATH/src/github.com/go-critic/go-critic
-    make gocritic
-    cd $RUNNING_PATH
-
-    #
-    # exit
-    #
-    exit 0
-fi
-
 
 # Uncomment if you want to check only commited code
 STAGED_GO_FILES=$(git diff --cached --name-only | grep ".go$")
@@ -96,7 +53,8 @@ if [[ ! -x "$GOCYCLO" ]]; then
 fi
 
 # Check for gocritic
-if [[ ! -x "$GOCRITIC" ]] && [[ $MACHINE_OS != "Windows" ]]; then
+# if [[ ! -x "$GOCRITIC" ]] && [[ $MACHINE_OS != "Windows" ]]; then
+if [[ ! -x "$GOCRITIC" ]]; then
     printf "\t\033[31mPlease install go-critic\033[0m (go get -v github.com/go-lintpack/lintpack/... && go get -v github.com/go-critic/go-critic/...)"
     exit 1
 fi
@@ -189,7 +147,7 @@ for FILE in $STAGED_GO_FILES; do
     # Run gocritic on the staged file and check the exit status
     COMMAND="$GOCRITIC check $FILE"
     printf "\t\033[90m$COMMAND\033[0m ... "
-    if [[ $MACHINE_OS != "Windows" ]]; then
+    # if [[ $MACHINE_OS != "Windows" ]]; then
         echo $COMMAND &> /tmp/__pre_commit_go__
         if [[ $? == 1 ]]; then
             printf "\033[31mFAILURE!\033[0m\n"
@@ -198,9 +156,9 @@ for FILE in $STAGED_GO_FILES; do
         else
             printf "\033[32mOK\033[0m\n"
         fi
-    else
-        printf "\033[32mSkiping on Windows\033[0m\n"
-    fi
+    # else
+    #     printf "\033[32mSkiping on Windows\033[0m\n"
+    # fi
 
     #
     # Unit Testing

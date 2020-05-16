@@ -17,3 +17,7 @@
 # IDE
 *.code-workspace
 .idea
+
+# Coverage
+.coverage.out
+.coverage.html
