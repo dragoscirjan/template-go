@@ -19,5 +19,4 @@
 .idea
 
 # Coverage
-.coverage.out
-.coverage.html
+.coverage
