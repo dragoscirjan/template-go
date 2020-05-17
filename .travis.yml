@@ -1,0 +1,33 @@
+language: node_js
+os:
+  # - linux
+  # - osx
+  - windows
+node_js:
+  - 1.12.x
+  - 1.13.x
+  - 1.14.x
+  - master
+sudo: false
+# install:
+#   # Add Godeps dependencies to GOPATH and PATH
+#   - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
+#   - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+before_script:
+  - make configure
+scripts:
+  - build build
+# after_script:
+#   - test $TRAVIS_NODE_VERSION == '12' && sonar-scanner
+notifications:
+  email:
+    recipients:
+      - dragos.cirjan@gmail.com
+    on_success: never
+    on_failure: always
+# addons:
+#   sonarcloud:
+#     organization: "organisation"
+#     token:
+#       secure: "secure"
+
