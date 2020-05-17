@@ -16,7 +16,7 @@ sudo: false
 before_script:
   - make configure
 scripts:
-  - build build
+  - make build
 # after_script:
 #   - test $TRAVIS_NODE_VERSION == '12' && sonar-scanner
 notifications:
