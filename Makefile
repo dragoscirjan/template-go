@@ -101,9 +101,7 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 configure-bash:
 	[ -f .git/hooks/pre-commit ] || ln -s .scripts/git-hooks/pre-commit.sh .git/hooks/pre-commit
 	chmod 755 .git/hooks/pre-commit
-	# curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
-	# 	| sh -s -- -b $$(go env GOPATH)/bin \
-	# 	$$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
+	curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin $$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
 
 # https://winaero.com/blog/create-symbolic-link-windows-10-powershell/
 configure-powershell:
@@ -127,6 +125,7 @@ install: build ## Install Application
 run: ## Run Application
 	go run ...
 
+
 uninstall: ## Uninstall Application
 	@echo 'Uninstall Instructions'
 
@@ -135,11 +134,6 @@ GO_TEST_FLAGS=-tags=unit -timeout 30s -short -coverprofile=.coverage/coverage -v
 GO_TEST=go test $(GO_TEST_FLAGS)
 GO_COVERAGE_FLAGS=-o .coverage/coverage.html -html=.coverage/coverage
 GO_COVERAGE=go tool cover $(GO_COVERAGE_FLAGS)
-
-TEST_PATH=./src/...
-test-single:
-	$(GO_TEST) $(TEST_PATH)
-
 test: test-$(SHELL_IS) ## Run Tests
 	$(GO_COVERAGE)
 
@@ -156,3 +150,8 @@ test-bash:
 test-powershell:
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path .\.coverage
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Test -Command "$(GO_TEST)"
+
+
+TEST_PATH=./src/...
+test-single:
+	$(GO_TEST) $(TEST_PATH)
