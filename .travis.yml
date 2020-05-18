@@ -9,9 +9,6 @@ go:
   - 1.13.x
   - 1.14.x
   # - master
-env:
-  # - "PATH=/home/travis/gopath/bin:$PATH"
-  # - GO111MODULE=on
 before_install:
   # https://docs.travis-ci.com/user/private-dependencies#api-token
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
@@ -19,10 +16,8 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install make; fi
 before_script:
-  - make configure IN_TRAVIS=1
+  - make configure
 scripts:
-  # - pwd
-  # - go get -t -v ./...
   - bash .scripts/pre-commit.sh --all
   - make build
   - make run
