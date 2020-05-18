@@ -95,7 +95,7 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 
 	go get github.com/fzipp/gocyclo
 
-	go get ./...
+	go get -t -v ./...
 
 configure-bash:
 	chmod 755 .scripts/pre-commit.sh
