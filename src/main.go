@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/templ-project/go/src/pkg/hello"
+	"github.com/templ-project/go/src/pkg/version"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	fmt.Println(hello.HelloWorld("World"))
+	fmt.Println()
+	version.ShowVersion()
 }
