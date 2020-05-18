@@ -102,6 +102,8 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 
 	echo "cd $$GOPATH/src/github.com/go-critic/go-critic && make gocritic"
 
+	go get ./...
+
 configure-bash:
 	chmod 755 .scripts/pre-commit.sh
 	[ -f .git/hooks/pre-commit ] || ln -s .scripts/pre-commit.sh .git/hooks/pre-commit
