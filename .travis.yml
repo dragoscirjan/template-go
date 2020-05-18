@@ -11,12 +11,9 @@ go:
 sudo: false
 env:
   - GO111MODULE=on
-before_install: case $TRAVIS_OS_NAME in
-  windows)
-  choco install -y make;
-  powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned';
-  ;
-  esac
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install -y make; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'; fi
 # install:
 #   # Add Godeps dependencies to GOPATH and PATH
 #   - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
