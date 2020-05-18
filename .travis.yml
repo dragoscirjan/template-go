@@ -20,10 +20,10 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install make; fi
 install:
   - export GOPATH=$HOME/go
-  - export TRAVIS_BUILD_DIR=$HOME/go/src/github.com/{user}/go
-  - mkdir -p $HOME/go/src/github/{user}
-  - cd $HOME/go/src/github/{user}
-  - mv github.com/{user}/go ./
+  - export TRAVIS_BUILD_DIR=$HOME/go/src/github.com/templ-project/go
+  - mkdir -p $HOME/go/src/github/templ-project
+  - cd $HOME/go/src/github/templ-project
+  - mv github.com/templ-project/go ./
   - cd go
 before_script:
   - make configure IN_TRAVIS=1
