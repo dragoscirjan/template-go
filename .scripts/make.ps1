@@ -77,7 +77,7 @@ function GoTest() {
   param(
     [Parameter(Mandatory = $True)][System.String]$Command
   )
-  $Tests = Get-Childitem -Path . -Include *_test.go -File -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+  $Tests = Get-Childitem -Path .\src -Include *_test.go -File -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
     "." + (Split-Path -Path $$_).Replace((Get-Location).Path, "") + "\..."
   } | Sort-Object -Unique;
   $GoCommand = "$Command $Tests"

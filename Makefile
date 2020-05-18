@@ -25,7 +25,7 @@ BUILD_COMMIT = $(shell git log --format="%%h" -n 1)
 BUILD_DATE = $(shell date --utc)
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
 BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
-BUILD_SRC = ./main.go
+BUILD_SRC = ./src/main.go
 BUILD_BIN = $(BUILD_PATH)/main
 ifeq ($(OSFLAG),WIN32)
 BUILD_DATE = $(shell $(POWERSHELL) -Command 'Get-Date -Format "yyyyMMddHHmmss"')
@@ -63,7 +63,7 @@ build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: BUILD_SRC = -Src ./main.go
+build-powershell: BUILD_SRC = -Src ./src/main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
@@ -145,7 +145,7 @@ RUN_ARGS  =
 run: run-$(SHELL_IS) ## Run Application (from source code)
 
 run-bash:
-	go run ./main.go $(RUN_ARGS)
+	go run ./src/main.go $(RUN_ARGS)
 
 run-powershell:
 	go run .\main.go $(RUN_ARGS)
@@ -176,7 +176,7 @@ test: test-$(SHELL_IS) ## Run Tests
 
 test-bash:
 	mkdir -p ./.coverage
-	find . -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
+	find ./src -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
 
 # test-powershell:
 # 	$(GO_TEST) .\...
