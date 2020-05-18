@@ -25,13 +25,13 @@ BUILD_COMMIT = $(shell git log --format="%%h" -n 1)
 BUILD_DATE = $(shell date --utc)
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
 BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
-BUILD_SRC = ./src/main.go
+BUILD_SRC = ./main.go
 BUILD_BIN = $(BUILD_PATH)/main
 ifeq ($(OSFLAG),WIN32)
 BUILD_DATE = $(shell $(POWERSHELL) -Command 'Get-Date -Format "yyyyMMddHHmmss"')
 # BUILD_PATH = .\dist\$(BUILD_OS)\$(BUILD_ARCH)
 # BUILD_VARS = set GOOS="$(BUILD_OS)"; set GOARCH="$(BUILD_ARCH)";
-# BUILD_SRC = .\src\main.go
+# BUILD_SRC = .\main.go
 # BUILD_BIN = $(BUILD_PATH)\main
 endif
 
@@ -41,9 +41,9 @@ else
 	BUILD_EXT =
 endif
 
-BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.VersionName=$(BUILD_VERSION)
-BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.GitCommit=$(BUILD_COMMIT)
-BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.BuildDate=$(BUILD_DATE)
+BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT).VersionName=$(BUILD_VERSION)
+BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT).GitCommit=$(BUILD_COMMIT)
+BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT).BuildDate=$(BUILD_DATE)
 
 GO := GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH) go build -trimpath
 GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_FLAG)'
@@ -63,7 +63,7 @@ build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: BUILD_SRC = -Src ./src/main.go
+build-powershell: BUILD_SRC = -Src ./main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
@@ -145,10 +145,10 @@ RUN_ARGS  =
 run: run-$(SHELL_IS) ## Run Application (from source code)
 
 run-bash:
-	go run ./src/main.go $(RUN_ARGS)
+	go run ./main.go $(RUN_ARGS)
 
 run-powershell:
-	go run .\src\main.go $(RUN_ARGS)
+	go run .\main.go $(RUN_ARGS)
 
 
 run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary)
@@ -172,20 +172,20 @@ test: test-$(SHELL_IS) ## Run Tests
 	$(GO_COVERAGE)
 
 # test-bash:
-# 	$(GO_TEST) ./src/...
+# 	$(GO_TEST) ./...
 
 test-bash:
 	mkdir -p ./.coverage
-	find ./src -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
+	find . -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
 
 # test-powershell:
-# 	$(GO_TEST) .\src\...
+# 	$(GO_TEST) .\...
 
 test-powershell:
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path .\.coverage
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Test -Command "$(GO_TEST)"
 
 
-TEST_PATH=./src/...
+TEST_PATH=./...
 test-single:
 	$(GO_TEST) $(TEST_PATH)

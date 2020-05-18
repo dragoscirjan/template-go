@@ -8,7 +8,7 @@ param(
   [System.String]$LdFlags = '',
   # [System.String[]]$LdFlags = @(),
   [System.String]$O = '',
-  [System.String]$Src = '.\src\main.o'
+  [System.String]$Src = '.\main.o'
 )
 
 function GoBuild() {
@@ -78,7 +78,7 @@ function GoTest() {
     [Parameter(Mandatory = $True)][System.String]$Command
   )
   $Tests = Get-Childitem -Path . -Include *_test.go -File -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
-    "." + (Split-Path -Path $$_).Replace((Get-Location).Path, "") + "\src\..."
+    "." + (Split-Path -Path $$_).Replace((Get-Location).Path, "") + "\..."
   } | Sort-Object -Unique;
   $GoCommand = "$Command $Tests"
   $GoCommandArray = $GoCommand.Split(' ')
@@ -94,7 +94,7 @@ switch ($Action.ToLower()) {
   'configure' { GoConfigure; break; }
   'init' { GoInit; break; }
   'mkdir' { GoMkDir -Path $Path; break; }
-  'rmdir' { GoRmDir -Path $Path; bxreak; }
+  'rmdir' { GoRmDir -Path $Path; break; }
   'test' { GoTest -Command "$Command"; break; }
   default { Write-Host -ForegroundColor Red "No good action chosen"; exit 1; }
 }

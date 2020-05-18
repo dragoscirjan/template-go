@@ -22,7 +22,7 @@ STAGED_GO_FILES=$(git diff --cached --name-only | grep ".go$")
 # STAGED_GO_FILES=$(git diff --name-only | grep ".go$")
 
 # DO NOT USE THIS FOR DEV
-echo $@ | grep "\-\-all" > /dev/null && STAGED_GO_FILES=$(find ./src -iname "*.go")
+echo $@ | grep "\-\-all" > /dev/null && STAGED_GO_FILES=$(find . -iname "*.go")
 
 if [[ "$STAGED_GO_FILES" = "" ]]; then
     exit 0
