@@ -96,23 +96,29 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 
 	go get github.com/fzipp/gocyclo
 
-	go get -v -u github.com/go-lintpack/lintpack/...
-	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
-
-	go get -v github.com/go-critic/go-critic/...
-	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
-
 	go get ./...
 
 configure-bash:
 	chmod 755 .scripts/pre-commit.sh
 	[ -f .git/hooks/pre-commit ] || ln -s .scripts/pre-commit.sh .git/hooks/pre-commit
 
+	go get -v -u github.com/go-lintpack/lintpack/...
+	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
+
+	go get -v github.com/go-critic/go-critic/...
+	cd $$GOPATH/src/github.com/go-critic/go-critic; make gocritic
+
 	curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin $$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
 
 # https://winaero.com/blog/create-symbolic-link-windows-10-powershell/
 configure-powershell:
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Configure
+
+	go get -v -u github.com/go-lintpack/lintpack/...
+	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
+
+	go get -v github.com/go-critic/go-critic/...
+	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
 
 
 init: init-$(SHELL_IS)
