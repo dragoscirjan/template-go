@@ -12,6 +12,7 @@ sudo: false
 env:
   - GO111MODULE=on
 before_install:
+  # https://docs.travis-ci.com/user/private-dependencies#api-token
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install -y make; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'; fi
