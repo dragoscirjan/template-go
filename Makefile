@@ -1,9 +1,9 @@
-include Makefile.template
+include Makefile.include
 
 ## Add your make instructions here
 
-PROJECT_PREFIX=github.com/dragoscirjan
-PROJECT=template-go
+PROJECT_PREFIX=github.com/templ-project
+PROJECT=go
 
 GIT_CERT_IGNORE =
 GIT_CERT_IGNORE_COMMAND =
@@ -22,18 +22,17 @@ BUILD_VERSION=none
 endif
 BUILD_COMMIT = $(shell git log --format="%%h" -n 1)
 
+BUILD_DATE = $(shell date --utc)
+BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
+BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
+BUILD_SRC = ./src/main.go
+BUILD_BIN = $(BUILD_PATH)/main
 ifeq ($(OSFLAG),WIN32)
-	BUILD_DATE = $(shell $(POWERSHELL) -Command 'Get-Date -Format "yyyyMMddHHmmss"')
-	BUILD_PATH = .\dist\$(BUILD_OS)\$(BUILD_ARCH)
-	BUILD_VARS = set GOOS="$(BUILD_OS)"; set GOARCH="$(BUILD_ARCH)";
-	BUILD_SRC = .\src\main.go
-	BUILD_BIN = $(BUILD_PATH)\main
-else
-	BUILD_DATE = $(shell date --utc)
-	BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
-	BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
-	BUILD_SRC = ./src/main.go
-	BUILD_BIN = $(BUILD_PATH)/main
+BUILD_DATE = $(shell $(POWERSHELL) -Command 'Get-Date -Format "yyyyMMddHHmmss"')
+# BUILD_PATH = .\dist\$(BUILD_OS)\$(BUILD_ARCH)
+# BUILD_VARS = set GOOS="$(BUILD_OS)"; set GOARCH="$(BUILD_ARCH)";
+# BUILD_SRC = .\src\main.go
+# BUILD_BIN = $(BUILD_PATH)\main
 endif
 
 ifeq ($(BUILD_OS),windows)
@@ -65,7 +64,7 @@ build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: BUILD_SRC = -Src .\src\main.go
+build-powershell: BUILD_SRC = -Src ./src/main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
