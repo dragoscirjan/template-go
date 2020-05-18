@@ -29,7 +29,7 @@ function GoBuild() {
 
   Write-Host -ForegroundColor Green "`$env:GOOS = $GoOs; `$env:GOARCH = $GoArch; $GoCommand -ldflags=`"$LdFlags`" -o $O $Src"
 
-  Start-Process -Filepath $GoCommandArray[0] -ArgumentList ($GoCommandArray[1..($GoCommandArray.Length - 1)] + " -ldflags `"$LdFlags`" -o $O $Src") -NoNewWindow -PassThru -Wait
+  # Start-Process -Filepath $GoCommandArray[0] -ArgumentList ($GoCommandArray[1..($GoCommandArray.Length - 1)] + " -ldflags `"$LdFlags`" -o $O $Src") -NoNewWindow -PassThru -Wait
 }
 
 function GoConfigure() {
