@@ -10,7 +10,7 @@ go:
   - 1.14.x
   # - master
 env:
-  - "PATH=/home/travis/gopath/bin:$PATH"
+  # - "PATH=/home/travis/gopath/bin:$PATH"
   # - GO111MODULE=on
 before_install:
   # https://docs.travis-ci.com/user/private-dependencies#api-token
@@ -23,6 +23,7 @@ before_install:
 scripts:
   - pwd
   - ls -la
+  # - go get -t -v ./...
   # - bash .scripts/pre-commit.sh --all
   # - make build
   # - make run
