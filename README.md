@@ -1,19 +1,25 @@
-# Project Title
+# GoLang Project
+
+<img alt="GoLang logo" src="https://golang.org/lib/godoc/images/home-gopher.png" width="20%" align="right" />
+
+> **go** is a template project, designed for [Templ Project](http://templ-project.github.io).
+> **go** includes instructions for initializing a new project, configuring the project for development,
+> unit testing as well as code linting and analysis.
+
+<!-- > TODO: -->
 
 Set of shield/badges explaining where to find more information about the project (i.e. Where to look for unit test reports, where to see code coverage and code scans, etc.). You can find a lot of them on https://shields.io/)
 
-<!-- [![Npm Version](https://img.shields.io/npm/v/frameworks.svg)](https://www.npmjs.com/package/frameworks) -->
-<!-- [![HitCount](http://hits.dwyl.io/dragoscirjan/template.svg)](http://hits.dwyl.io/dragoscirjan/template) -->
-<!-- [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dragoscirjan/template/issues) -->
+[![Npm Version](https://img.shields.io/github/go-mod/go-version/templ-project/go)](https://img.shields.io/github/go-mod/go-version/templ-project/go)
+[![TravisCI](https://travis-ci.org/templ-project/go.svg?branch=master)](https://travis-ci.org/templ-project/go)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/templ-project/go/issues)
 
-[![TravisCI](https://travis-ci.org/dragoscirjan/template.svg?branch=master)](https://travis-ci.org/dragoscirjan/template)
+<!-- [![CircleCI](https://circleci.com/gh/templ-project/go.svg?style=shield)](https://circleci.com/gh/templ-project/go) -->
 
-<!-- [![CircleCI](https://circleci.com/gh/dragoscirjan/template.svg?style=shield)](https://circleci.com/gh/dragoscirjan/template) -->
-
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=dragoscirjan_template&metric=alert_status)](https://sonarcloud.io/dashboard?id=dragoscirjan_template)
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=dragoscirjan_template&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=dragoscirjan_template)
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=dragoscirjan_template&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=dragoscirjan_template)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=dragoscirjan_template&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=dragoscirjan_template)
+<!-- [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=templ-project_go&metric=alert_status)](https://sonarcloud.io/dashboard?id=templ-project_go)
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=templ-project_go&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=templ-project_go)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=templ-project_go&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=templ-project_go)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=templ-project_go&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=templ-project_go) -->
 
 <!--
 [![Donate to this project using Patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://patreon.com/dragoscirjan)
@@ -39,7 +45,7 @@ which is also included in
 -->
 <!-- TOC -->
 
-- [Project Title](#project-title)
+- [GoLang Project](#golang-project)
   - [Getting Started](#getting-started)
     - [Prereqiusites / Dependencies](#prereqiusites--dependencies)
       - [For Windows](#for-windows)
@@ -53,9 +59,7 @@ which is also included in
         - [For Windows](#for-windows-1)
         - [For Linux/Unix/OSX](#for-linuxunixosx)
     - [Testing](#testing)
-      - [Break down into (at least) unit tests](#break-down-into-at-least-unit-tests)
-      - [and end to end tests](#and-end-to-end-tests)
-      - [And coding style tests](#and-coding-style-tests)
+      - [Single Tests](#single-tests)
     - [Deployment](#deployment)
   - [Authors](#authors)
   - [Issues / Support](#issues--support)
@@ -67,8 +71,6 @@ which is also included in
 ## Getting Started
 
 ### Prereqiusites / Dependencies
-
-- Please install a Go IDE
 
 #### For Windows
 
@@ -137,30 +139,14 @@ give examples
 
 ### Testing
 
-Explain how to run the automated tests for this system
+Run unit tests using `make test`.
 
-#### Break down into (at least) unit tests
+#### Single Tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-#### and end to end tests
-
-Explain what these tests test and why
+Run single unit tests file, by calling `make test-single TEST_PATH=./path/to/file/...`
 
 ```
-Give an example
-```
-
-#### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+make test-single TEST_PATH=./src/greet/...
 ```
 
 ### Deployment
@@ -175,7 +161,7 @@ See also the list of contributors who participated in this project.
 
 ## Issues / Support
 
-Add a set of links to the [issues](/dragoscirjan/template/issues) page/website, so people can know where to add issues/bugs or ask for support.
+Add a set of links to the [issues](/templ-project/go/issues) page/website, so people can know where to add issues/bugs or ask for support.
 
 ## License
 
