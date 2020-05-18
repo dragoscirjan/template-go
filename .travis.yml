@@ -21,7 +21,7 @@ before_install:
 # before_script:
 #   - make configure IN_TRAVIS=1
 scripts:
-  - cwd
+  - pwd
   - ls -la
   # - bash .scripts/pre-commit.sh --all
   # - make build
