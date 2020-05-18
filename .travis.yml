@@ -14,6 +14,7 @@ env:
 before_install: case $TRAVIS_OS_NAME in
   windows)
   choco install -y make
+  powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
   ;;
   esac
 # install:
