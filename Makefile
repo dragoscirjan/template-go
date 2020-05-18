@@ -65,8 +65,8 @@ build-bash: build-bash-mkdir build-run
 build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
-build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command {go build -trimpath} -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: GO_LDFLAGS_FLAG = {$(GO_LDFLAGS)}
+build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
+build-powershell: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
 # build-powershell: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
 build-powershell: BUILD_SRC = -Src .\src\main.go
 build-powershell: build-powershell-mkdir build-run

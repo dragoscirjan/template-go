@@ -29,7 +29,7 @@ function GoBuild() {
 
   Write-Host -ForegroundColor Green "`$env:GOOS = $GoOs; `$env:GOARCH = $GoArch; $GoCommand -ldflags=`"$LdFlags`" -o $O $Src"
 
-  # Start-Process -Filepath $GoCommandArray[0] -ArgumentList ($GoCommandArray[1..($GoCommandArray.Length - 1)] + " -ldflags `"$LdFlags`" -o $O $Src") -NoNewWindow -PassThru -Wait
+  Start-Process -Filepath $GoCommandArray[0] -ArgumentList ($GoCommandArray[1..($GoCommandArray.Length - 1)] + " -ldflags `"$LdFlags`" -o $O $Src") -NoNewWindow -PassThru -Wait
 }
 
 function GoConfigure() {
@@ -98,7 +98,3 @@ switch ($Action.ToLower()) {
   'test' { GoTest -Command "$Command"; break; }
   default { Write-Host -ForegroundColor Red "No good action chosen"; exit 1; }
 }
-
-# $env:GOOS = "linux";
-# $env:GOARCH = "amd64";
-# go build -trimpath -ldflags="$LdFlags" -o "$O" $SrcB

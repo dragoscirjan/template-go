@@ -22,6 +22,7 @@ before_script:
   - make configure
 scripts:
   - make build
+  - make build BUILD_OS=windows
 # after_script:
 #   - test $TRAVIS_NODE_VERSION == '12' && sonar-scanner
 notifications:
