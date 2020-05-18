@@ -1,17 +1,18 @@
 language: go
 os:
   - linux
-  # - osx
+  - osx
   - windows
 go:
   - 1.12.x
   - 1.13.x
   - 1.14.x
-  - master
+  # - master
 sudo: false
 env:
   - GO111MODULE=on
 before_install:
+  - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install -y make; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install make; fi
