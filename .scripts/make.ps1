@@ -34,14 +34,19 @@ function GoBuild() {
 
 function GoConfigure() {
   if (-not (Test-Path ".\.git\hooks\pre-commit" -PathType Leaf)) {
-    Write-Host -ForegroundColor Green "The following step requires elevated rights. Unfortunately Windows does not allow creating symlinks unless running the command with eleveated rights.";
-    Write-Host -ForegroundColor Green "We will open a PowerShell console running with Administrator rigths. Please run the following command in that console, then close it.";
     $CurentDirectory = (Get-Location).Path;
-    Write-Host '';
-    Write-Host -ForegroundColor Yellow  "Set-Location $CurentDirectory; New-Item -ItemType SymbolicLink -Path .\.git\hooks\pre-commit -Target .\.scripts\pre-commit.sh;";
-    Write-Host '';
-    read-host 'Press ENTER to continue...';
-    Start-Process -FilePath "powershell" -Verb RunAs;
+    try {
+      Set-Location $CurentDirectory; New-Item -ItemType SymbolicLink -Path .\.git\hooks\pre-commit -Target .\.scripts\pre-commit.sh;
+    }
+    catch {
+      Write-Host -ForegroundColor Green "The following step requires elevated rights. Unfortunately Windows does not allow creating symlinks unless running the command with eleveated rights.";
+      Write-Host -ForegroundColor Green "We will open a PowerShell console running with Administrator rigths. Please run the following command in that console, then close it.";
+      Write-Host '';
+      Write-Host -ForegroundColor Yellow  "Set-Location $CurentDirectory; New-Item -ItemType SymbolicLink -Path .\.git\hooks\pre-commit -Target .\.scripts\pre-commit.sh;";
+      Write-Host '';
+      read-host 'Press ENTER to continue...';
+      Start-Process -FilePath "powershell" -Verb RunAs;
+    }
   }
 
 }

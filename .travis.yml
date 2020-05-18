@@ -4,10 +4,10 @@ os:
   # - osx
   - windows
 node_js:
-  - 1.12.x
-  - 1.13.x
+  # - 1.12.x
+  # - 1.13.x
   - 1.14.x
-  - master
+  # - master
 sudo: false
 before_install: case $TRAVIS_OS_NAME in
   windows)
