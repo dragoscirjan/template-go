@@ -99,8 +99,8 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 	echo "cd $$GOPATH/src/github.com/go-critic/go-critic && make gocritic"
 
 configure-bash:
-	[ -f .git/hooks/pre-commit ] || ln -s .scripts/git-hooks/pre-commit.sh .git/hooks/pre-commit
-	chmod 755 .scripts/git-hooks/pre-commit.sh
+	chmod 755 .scripts/pre-commit.sh
+	[ -f .git/hooks/pre-commit ] || ln -s .scripts/pre-commit.sh .git/hooks/pre-commit
 	curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin $$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
 
 # https://winaero.com/blog/create-symbolic-link-windows-10-powershell/
