@@ -11,7 +11,7 @@ go:
   # - master
 env:
   # - "PATH=/home/travis/gopath/bin:$PATH"
-  - GO111MODULE=on
+  # - GO111MODULE=on
 before_install:
   # https://docs.travis-ci.com/user/private-dependencies#api-token
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc

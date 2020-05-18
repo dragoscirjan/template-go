@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println(greet.Hellor("World"))
+	fmt.Println(greet.Hello("World"))
 	fmt.Println()
 	ver.ShowVersion()
 }
