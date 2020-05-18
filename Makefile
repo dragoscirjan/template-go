@@ -148,7 +148,7 @@ run-bash:
 	go run ./src/main.go $(RUN_ARGS)
 
 run-powershell:
-	go run .\main.go $(RUN_ARGS)
+	go run .\src\main.go $(RUN_ARGS)
 
 
 run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary)
