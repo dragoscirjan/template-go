@@ -21,7 +21,7 @@ scripts:
   - bash .scripts/pre-commit.sh --all
   - make build
   - make run
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=$TRAVIS_OS_NAME BUILD_ARCH=386; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
 # after_script:
 #   - test $TRAVIS_NODE_VERSION == '12' && sonar-scanner
 notifications:
