@@ -54,7 +54,7 @@ fi
 
 # Check for gocritic
 # if [[ ! -x "$GOCRITIC" ]] && [[ $MACHINE_OS != "Windows" ]]; then
-if [[ ! -x "$GOCRITIC" ]]; then
+if [[ ! -x "$GOCRITIC" ]] && [[ "$TRAVIS_OS_NAME" = "" ]]; then
     printf "\t\e[33;31mPlease install go-critic\e[m (go get -v github.com/go-lintpack/lintpack/... && go get -v github.com/go-critic/go-critic/...)"
     exit 1
 fi
@@ -118,16 +118,20 @@ for FILE in $STAGED_GO_FILES; do
     fi
 
     # # Run golangci-lint on the staged file and check the exit status
-    # COMMAND="$GOLANGCILINT run $FILE"
-    # printf "\t\e[33;90m$COMMAND\e[m ... "
-    # $COMMAND #&> /tmp/__pre_commit_go__
-    # if [[ $? == 1 ]]; then
-    #     printf "\e[33;31mFAILURE!\e[m\n"
-    #     printf "\e[33;31m$(cat /tmp/__pre_commit_go__)\e[m\n"
-    #     PASS=false
-    # else
-    #     printf "\e[33;32mOK\e[m\n"
-    # fi
+    COMMAND="$GOLANGCILINT run $FILE"
+    printf "\t\e[33;90m%s\e[m ... " "$COMMAND"
+    if [[ "$MACHINE_OS" != "Windows" ]]; then
+        $COMMAND #&> /tmp/__pre_commit_go__
+        if [[ $? == 1 ]]; then
+            printf "\e[33;31mFAILURE!\e[m\n"
+            printf "\e[33;31m$(cat /tmp/__pre_commit_go__)\e[m\n"
+            PASS=false
+        else
+            printf "\e[33;32mOK\e[m\n"
+        fi
+    else
+        printf "\e[33;93m%s\e[m\n" "Skipping on Windows"
+    fi
 
     #
     # Analysis
@@ -148,18 +152,18 @@ for FILE in $STAGED_GO_FILES; do
     # Run gocritic on the staged file and check the exit status
     COMMAND="$GOCRITIC check $FILE"
     printf "\t\e[33;90m%s\e[m ... " "$COMMAND"
-    # if [[ $MACHINE_OS != "Windows" ]]; then
-    echo $COMMAND &> /tmp/__pre_commit_go__
-    if [[ $? == 1 ]]; then
-        printf "\e[33;31mFAILURE!\e[m\n"
-        printf "\e[33;31m$(cat /tmp/__pre_commit_go__)\e[m\n"
-        PASS=false
+    if [[ "$TRAVIS_OS_NAME" = "" ]]; then
+        echo $COMMAND &> /tmp/__pre_commit_go__
+        if [[ $? == 1 ]]; then
+            printf "\e[33;31mFAILURE!\e[m\n"
+            printf "\e[33;31m$(cat /tmp/__pre_commit_go__)\e[m\n"
+            PASS=false
+        else
+            printf "\e[33;32mOK\e[m\n"
+        fi
     else
-        printf "\e[33;32mOK\e[m\n"
+        printf "\e[33;93m%s\e[m\n" "Skipping on Travis"
     fi
-    # else
-    #     printf "\e[33;32mSkiping on Windows\e[m\n"
-    # fi
 
     #
     # Unit Testing

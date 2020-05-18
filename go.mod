@@ -14,5 +14,5 @@ require (
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381 // indirect
 	github.com/stretchr/testify v1.5.1
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
-	golang.org/x/tools v0.0.0-20200518172458-c79c01b1c51c // indirect
+	golang.org/x/tools v0.0.0-20200518195306-39aadb5b76f2 // indirect
 )
