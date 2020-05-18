@@ -49,6 +49,9 @@ which is also included in
       - [Say what the step will be](#say-what-the-step-will-be)
       - [And repeat](#and-repeat)
     - [Development](#development)
+      - [Requirements](#requirements)
+        - [For Windows](#for-windows-1)
+        - [For Linux/Unix/OSX](#for-linuxunixosx)
     - [Testing](#testing)
       - [Break down into (at least) unit tests](#break-down-into-at-least-unit-tests)
       - [and end to end tests](#and-end-to-end-tests)
@@ -65,17 +68,9 @@ which is also included in
 
 ### Prereqiusites / Dependencies
 
-What things you need to install the software and how to install them (based on each OS type).
+- Please install a Go IDE
 
 #### For Windows
-
-- Please install [git-scm](https://git-scm.com/download/win) tool.
-- Please install a form of make/cmake
-  - Install [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
-  - Install [make](https://sourceforge.net/projects/ezwinports/files/) from [ezwinports](https://sourceforge.net/projects/ezwinports/files/)
-  - Install [chocolatey](https://chocolatey.org/), run `choco install make`
-  <!-- - Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
-    - You will find it under `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\bin\Hostx64` -->
 
 ```bash
 
@@ -114,7 +109,27 @@ End with an example of getting some data out of the system or using it for a lit
 
 ### Development
 
-Explain any development process for the project, if necesary
+#### Requirements
+
+- Please install [GoLang](https://golang.org/dl/). We support version 1.13.x and 1.14.x
+- Please instal a GoLang IDE
+  - [Visual Studio Code](https://code.visualstudio.com/) with [ITMCDev Go Extension Pack](https://marketplace.visualstudio.com/items?itemName=itmcdev.go-extension-pack)
+  - [Jetbrains GoLand](https://www.jetbrains.com/go/)
+  - [Vim](https://www.vim.org/) with [vim-go extension](https://github.com/fatih/vim-go)
+
+##### For Windows
+
+- Please install [git-scm](https://git-scm.com/download/win) tool.
+- Please install a form of make/cmake
+  - Install [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
+  - Install [make](https://sourceforge.net/projects/ezwinports/files/) from [ezwinports](https://sourceforge.net/projects/ezwinports/files/)
+  - Install [chocolatey](https://chocolatey.org/), run `choco install make`
+  <!-- - Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
+    - You will find it under `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\bin\Hostx64` -->
+
+##### For Linux/Unix/OSX
+
+- Please install `git` and `make`
 
 ```
 give examples
