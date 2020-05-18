@@ -106,10 +106,12 @@ configure-bash:
 	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
 
 	go get -v github.com/go-critic/go-critic/...
+ifeq ($(IN_TRAVIS),)
 ifeq ($(OSFLAG),WIN32)
 	cd $$GOPATH/src/github.com/go-critic/go-critic; make gocritic
 else
 	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
+endif
 endif
 
 	curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin $$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
@@ -122,8 +124,9 @@ configure-powershell:
 	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
 
 	go get -v github.com/go-critic/go-critic/...
+ifeq ($(IN_TRAVIS),)
 	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
-
+endif
 
 init: init-$(SHELL_IS)
 	go mod init $(PROJECT_PREFIX)/$(PROJECT)
