@@ -100,7 +100,7 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 
 configure-bash:
 	[ -f .git/hooks/pre-commit ] || ln -s .scripts/git-hooks/pre-commit.sh .git/hooks/pre-commit
-	chmod 755 .git/hooks/pre-commit
+	chmod 755 .scripts/git-hooks/pre-commit.sh
 	curl --insecure -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin $$(curl -sSL https://github.com/golangci/golangci-lint/releases | grep "releases/tag" | head -n 1 | awk -F '>' '{print $$2}' | awk -F '<' '{print $$1}')
 
 # https://winaero.com/blog/create-symbolic-link-windows-10-powershell/
@@ -122,8 +122,23 @@ install: build ## Install Application
 	@echo 'Install Instructions'
 
 
-run: ## Run Application
-	go run ...
+RUN_ARGS  =
+run: run-$(SHELL_IS) ## Run Application (from source code)
+
+run-bash:
+	go run ./src/main.go $(RUN_ARGS)
+
+run-powershell:
+	go run .\src\main.go $(RUN_ARGS)
+
+
+run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary)
+
+run-binary-bash:
+	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
+
+run-binary-powershell:
+	.\dist\$(BUILD_OS)\$(BUILD_ARCH)\main.exe $(RUN_ARGS)
 
 
 uninstall: ## Uninstall Application
