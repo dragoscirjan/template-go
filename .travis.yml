@@ -10,7 +10,7 @@ go:
   # - master
 sudo: false
 env:
-  - GO111MODULE=1
+  - GO111MODULE=on
 before_install: case $TRAVIS_OS_NAME in
   windows)
   choco install -y make
