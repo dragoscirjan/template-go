@@ -20,7 +20,7 @@ before_install:
 before_script:
   - make configure
 scripts:
-  - bash ./.scripts/pre-commit.sh --all
+  - ./.scripts/pre-commit.sh --all
   - make build
   - make run
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=$TRAVIS_OS_NAME BUILD_ARCH=386; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
