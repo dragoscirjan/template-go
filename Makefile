@@ -57,17 +57,14 @@ GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_F
 build: build-$(SHELL_IS) ## Build Application BUILD_OS=? BUILD_ARCH=? #$(BUILD_SRC)
 
 build-run:
-	$(GO) -ldflags $(GO_LDFLAGS_FLAG) -o $(BUILD_BIN)$(BUILD_EXT) $(BUILD_SRC)
+	$(GO) -ldflags "$(GO_LDFLAGS)" -o $(BUILD_BIN)$(BUILD_EXT) $(BUILD_SRC)
 
-build-bash: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
 build-bash: build-bash-mkdir build-run
 
 build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
-# build-powershell: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
 build-powershell: BUILD_SRC = -Src .\src\main.go
 build-powershell: build-powershell-mkdir build-run
 
