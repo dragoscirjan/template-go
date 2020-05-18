@@ -65,14 +65,14 @@ build-bash: build-bash-mkdir build-run
 build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
-build-powershell: GO = $(POWERSHELL) -File .\.scripts\make.ps1 -Action Build -Command {go build -trimpath} -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
+build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command {go build -trimpath} -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
 build-powershell: GO_LDFLAGS_FLAG = {$(GO_LDFLAGS)}
 # build-powershell: GO_LDFLAGS_FLAG = "$(GO_LDFLAGS)"
 build-powershell: BUILD_SRC = -Src .\src\main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action MkDir -Path dist\$(BUILD_OS)\$(BUILD_ARCH)
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path dist\$(BUILD_OS)\$(BUILD_ARCH)
 
 CLEAN_FULL=
 clean: clean-$(SHELL_IS) ## Clean all dist/temp folders
@@ -86,9 +86,9 @@ endif
 
 clean-powershell:
 ifneq ($(CLEAN_FULL),)
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action RmDir -Path .\dist
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\dist
 else
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action RmDir -Path $(BUILD_PATH)
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path $(BUILD_PATH)
 endif
 
 
@@ -110,7 +110,7 @@ configure-bash:
 
 # https://winaero.com/blog/create-symbolic-link-windows-10-powershell/
 configure-powershell:
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action Configure
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Configure
 
 
 init: init-$(SHELL_IS)
@@ -120,7 +120,7 @@ init-bash:
 	rm -rf go.mod
 
 init-powershell:
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action Init
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init
 
 
 install: build ## Install Application
@@ -157,5 +157,5 @@ test-bash:
 # 	$(GO_TEST) .\src\...
 
 test-powershell:
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action MkDir -Path .\.coverage
-	$(POWERSHELL) -File .\.scripts\make.ps1 -Action Test -Command "$(GO_TEST)"
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path .\.coverage
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Test -Command "$(GO_TEST)"
