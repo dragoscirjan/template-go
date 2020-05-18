@@ -92,10 +92,15 @@ endif
 configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 	$(GIT_CERT_IGNORE_COMMAND)
 	go get -u golang.org/x/lint/golint
+
 	go get golang.org/x/tools/cmd/goimports
-	go get github.com/fzipp/gocyclo/...
-	go get -u github.com/go-lintpack/lintpack/...
-	go get github.com/go-critic/go-critic/...
+
+	go get github.com/fzipp/gocyclo
+
+	go get -v -u github.com/go-lintpack/lintpack/...
+	lintpack build -o gocritic github.com/go-critic/go-critic/checkers
+	go get -v github.com/go-critic/go-critic/...
+
 	echo "cd $$GOPATH/src/github.com/go-critic/go-critic && make gocritic"
 
 configure-bash:
