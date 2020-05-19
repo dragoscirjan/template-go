@@ -3,8 +3,17 @@
 <img alt="GoLang logo" src="https://github.com/templ-project/go/blob/master/Go-Logo_Blue.png?raw=true" width="20%" align="right" />
 
 > **go** is a template project, designed by [Templ Project](http://templ-project.github.io).
+>
 > **go** includes instructions for initializing a new [Go Lang](https://golang.org) project, and configuring it for
 > development, unit testing as well as code linting and analysis.
+>
+> **go** implements:
+>
+> - [gocyclo](https://github.com/fzipp/gocyclo), [go-critic](https://github.com/go-critic/go-critic) for code analisys
+> - [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports), [gofmt](https://golang.org/cmd/gofmt) for code formatting
+> - [golangci-lint](https://github.com/golangci/golangci-lint) (\*nix only), [golint](https://github.com/golang/lint) for linting
+>
+> **To use the template**, delete the content above, and fill in the following sections of this readme.
 
 <!-- > TODO: -->
 
