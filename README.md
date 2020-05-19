@@ -1,10 +1,10 @@
 # GoLang Project
 
-<img alt="GoLang logo" src="https://golang.org/lib/godoc/images/home-gopher.png" width="20%" align="right" />
+<img alt="GoLang logo" src="https://github.com/tus/tus.io/blob/master/assets/img/Go-Logo_Blue.png?raw=true" width="150" height="150" align="right" />
 
-> **go** is a template project, designed for [Templ Project](http://templ-project.github.io).
-> **go** includes instructions for initializing a new project, configuring the project for development,
-> unit testing as well as code linting and analysis.
+> **go** is a template project, designed by [Templ Project](http://templ-project.github.io).
+> **go** includes instructions for initializing a new [Go Lang](https://golang.org) project, and configuring it for
+> development, unit testing as well as code linting and analysis.
 
 <!-- > TODO: -->
 
