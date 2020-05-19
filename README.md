@@ -11,7 +11,7 @@
 >
 > - [gocyclo](https://github.com/fzipp/gocyclo), [go-critic](https://github.com/go-critic/go-critic) for code analisys
 > - [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports), [gofmt](https://golang.org/cmd/gofmt) for code formatting
-> - [golangci-lint](https://github.com/golangci/golangci-lint) (\*nix only), [golint](https://github.com/golang/lint) for linting
+> - [golangci-lint](https://github.com/golangci/golangci-lint), [golint](https://github.com/golang/lint) for linting
 >
 > **To use the template**, delete the content above, and fill in the following sections of this readme.
 
@@ -98,7 +98,7 @@ npm install -y node-gyp
 
 #### Known Issues / Troubleshooting
 
-Describe a list of known issues, and how to bypass them.
+- When developing, [golangci-lint](https://github.com/golangci/golangci-lint) will not be available on Windows.
 
 ### Installation
 
@@ -154,7 +154,7 @@ Run unit tests using `make test`.
 
 Run single unit tests file, by calling `make test-single TEST_PATH=./path/to/file/...`
 
-```
+```bash
 make test-single TEST_PATH=./src/greet/...
 ```
 
@@ -164,7 +164,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-- [Dragos Cirjan](mailto:dragos.cirjan@gmail.com) - Initial work - [PurpleBooth](#link-to-change)
+- [Dragos Cirjan](mailto:dragos.cirjan@gmail.com) - Initial work - [Go Template](/templ-project/go)
 
 See also the list of contributors who participated in this project.
 
