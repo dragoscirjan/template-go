@@ -83,8 +83,8 @@ which is also included in
 
 #### For Windows
 
-```bash
-
+```powershell
+# Give Examples
 ```
 
 #### For Linux
