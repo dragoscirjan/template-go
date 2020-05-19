@@ -142,8 +142,8 @@ End with an example of getting some data out of the system or using it for a lit
 
 - Please install `git` and `make`
 
-```
-give examples
+```bash
+sudo apt-get install git make -y
 ```
 
 ### Testing
