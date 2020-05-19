@@ -1,6 +1,6 @@
 # GoLang Project
 
-<img alt="GoLang logo" src="https://github.com/tus/tus.io/blob/master/assets/img/Go-Logo_Blue.png?raw=true" width="150" height="150" align="right" />
+<img alt="GoLang logo" src="https://github.com/templ-project/go/blob/master/Go-Logo_Blue.png?raw=true" width="20%" align="right" />
 
 > **go** is a template project, designed by [Templ Project](http://templ-project.github.io).
 > **go** includes instructions for initializing a new [Go Lang](https://golang.org) project, and configuring it for
