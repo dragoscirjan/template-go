@@ -15,6 +15,7 @@
 >
 > **To use the template**, delete the content above, and fill in the following sections of this readme.
 
+<hr>
 <!-- > TODO: -->
 
 Set of shield/badges explaining where to find more information about the project (i.e. Where to look for unit test reports, where to see code coverage and code scans, etc.). You can find a lot of them on https://shields.io/)
@@ -127,6 +128,7 @@ End with an example of getting some data out of the system or using it for a lit
   - [Visual Studio Code](https://code.visualstudio.com/) with [ITMCDev Go Extension Pack](https://marketplace.visualstudio.com/items?itemName=itmcdev.go-extension-pack)
   - [Jetbrains GoLand](https://www.jetbrains.com/go/)
   - [Vim](https://www.vim.org/) with [vim-go extension](https://github.com/fatih/vim-go)
+  - Any other IDE you trust.
 
 ##### For Windows
 
