@@ -13,7 +13,11 @@
 > - [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports), [gofmt](https://golang.org/cmd/gofmt) for code formatting
 > - [golangci-lint](https://github.com/golangci/golangci-lint), [golint](https://github.com/golang/lint) for linting
 >
-> **To use the template**, delete the content above, and fill in the following sections of this readme.
+> **To use the template**, delete the content above, fill in the following sections of this readme, and run the following (then delete the init\*: instruction sets from the `Makefile`):
+
+```powershell
+make init PROJECT_PREFIX=github.com/your-organisation PROJECT=project-name
+```
 
 <hr>
 <!-- > TODO: -->
