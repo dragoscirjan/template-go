@@ -18,11 +18,11 @@ BUILD_ARCH = amd64
 # BUILD_VERSION = $(shell git describe --tags $(GIT_REV_LIST))
 BUILD_VERSION = $(shell git for-each-ref refs/tags --sort=-taggerdate --format='%%(refname)' --count=1)
 ifeq ($(BUILD_VERSION),)
-BUILD_VERSION=none
+BUILD_VERSION=dev-$(shell git branch | grep "*" | cut -d ' ' -f 2)
 endif
-BUILD_COMMIT = $(shell git log --format="%%h" -n 1)
+BUILD_COMMIT = $(shell git log --format="%h" -n 1)
 
-BUILD_DATE = $(shell date --utc)
+BUILD_DATE = $(shell date --utc +%Y%m%d%H%M%S)
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
 BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
 BUILD_SRC = ./src/main.go
@@ -41,9 +41,9 @@ else
 	BUILD_EXT =
 endif
 
-BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT).VersionName=$(BUILD_VERSION)
-BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT).GitCommit=$(BUILD_COMMIT)
-BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT).BuildDate=$(BUILD_DATE)
+BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src/pkg/ver.VersionName=$(BUILD_VERSION)
+BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src/pkg/ver.GitCommit=$(BUILD_COMMIT)
+BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src/pkg/ver.BuildDate=$(BUILD_DATE)
 
 GO := GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH) go build -trimpath
 GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_FLAG)'
