@@ -1,11 +1,25 @@
 # GoLang Project
 
-<img alt="GoLang logo" src="https://golang.org/lib/godoc/images/home-gopher.png" width="20%" align="right" />
+<img alt="GoLang logo" src="https://github.com/templ-project/go/blob/master/Go-Logo_Blue.png?raw=true" width="20%" align="right" />
 
-> **go** is a template project, designed for [Templ Project](http://templ-project.github.io).
-> **go** includes instructions for initializing a new project, configuring the project for development,
-> unit testing as well as code linting and analysis.
+> **go** is a template project, designed by [Templ Project](http://templ-project.github.io).
+>
+> **go** includes instructions for initializing a new [Go Lang](https://golang.org) project, and configuring it for
+> development, unit testing as well as code linting and analysis.
+>
+> **go** implements:
+>
+> - [gocyclo](https://github.com/fzipp/gocyclo), [go-critic](https://github.com/go-critic/go-critic) for code analisys
+> - [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports), [gofmt](https://golang.org/cmd/gofmt) for code formatting
+> - [golangci-lint](https://github.com/golangci/golangci-lint), [golint](https://github.com/golang/lint) for linting
+>
+> **To use the template**, delete the content above, fill in the following sections of this readme, and run the following (then delete the init\*: instruction sets from the `Makefile`):
 
+```powershell
+make init PROJECT_PREFIX=github.com/your-organisation PROJECT=project-name
+```
+
+<hr>
 <!-- > TODO: -->
 
 Set of shield/badges explaining where to find more information about the project (i.e. Where to look for unit test reports, where to see code coverage and code scans, etc.). You can find a lot of them on https://shields.io/)
@@ -74,8 +88,8 @@ which is also included in
 
 #### For Windows
 
-```bash
-
+```powershell
+# Give Examples
 ```
 
 #### For Linux
@@ -89,7 +103,7 @@ npm install -y node-gyp
 
 #### Known Issues / Troubleshooting
 
-Describe a list of known issues, and how to bypass them.
+- When developing, [golangci-lint](https://github.com/golangci/golangci-lint) will not be available on Windows.
 
 ### Installation
 
@@ -118,6 +132,7 @@ End with an example of getting some data out of the system or using it for a lit
   - [Visual Studio Code](https://code.visualstudio.com/) with [ITMCDev Go Extension Pack](https://marketplace.visualstudio.com/items?itemName=itmcdev.go-extension-pack)
   - [Jetbrains GoLand](https://www.jetbrains.com/go/)
   - [Vim](https://www.vim.org/) with [vim-go extension](https://github.com/fatih/vim-go)
+  - Any other IDE you trust.
 
 ##### For Windows
 
@@ -133,8 +148,8 @@ End with an example of getting some data out of the system or using it for a lit
 
 - Please install `git` and `make`
 
-```
-give examples
+```bash
+sudo apt-get install git make -y
 ```
 
 ### Testing
@@ -145,7 +160,7 @@ Run unit tests using `make test`.
 
 Run single unit tests file, by calling `make test-single TEST_PATH=./path/to/file/...`
 
-```
+```bash
 make test-single TEST_PATH=./src/greet/...
 ```
 
@@ -155,7 +170,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-- [Dragos Cirjan](mailto:dragos.cirjan@gmail.com) - Initial work - [PurpleBooth](#link-to-change)
+- [Dragos Cirjan](mailto:dragos.cirjan@gmail.com) - Initial work - [Go Template](/templ-project/go)
 
 See also the list of contributors who participated in this project.
 
