@@ -52,38 +52,50 @@ GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_F
 # Instructions
 #
 
-build: test clean build-$(SHELL_IS) ## Build Application BUILD_OS=? BUILD_ARCH=? #$(BUILD_SRC)
+build: test clean build-$(SHELL_IS) ## Build Application BUILD_OS=? BUILD_ARCH=? #$(BUILD_SRC) (usabled only in app mode)
 
 build-run:
+ifneq ($(wildcard ./src/.*),)
 	$(GO) -ldflags "$(GO_LDFLAGS)" -o $(BUILD_BIN)$(BUILD_EXT) $(BUILD_SRC)
+else
+	@echo "build command is usabled only in 'app' mode.
+endif
 
 build-bash: build-bash-mkdir build-run
 
 build-bash-mkdir:
+ifneq ($(wildcard ./src/.*),)
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
+endif
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
 build-powershell: BUILD_SRC = -Src ./src/main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
+ifneq ($(wildcard ./src/.*),)
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path dist\$(BUILD_OS)\$(BUILD_ARCH)
+endif
 
 CLEAN_FULL=
 clean: clean-$(SHELL_IS) ## Clean all dist/temp folders
 
-clean-bash:
+clean-bash: # TODO clean temporary /tmp/go-* smth...
+ifneq ($(wildcard ./src/.*),)
 ifneq ($(CLEAN_FULL),)
 	rm -rf ./dist
 else
 	rm -rf $(BUILD_PATH)
 endif
+endif
 
-clean-powershell:
+clean-powershell: # TODO clean temporary APPDATA/go-* smth...
+ifneq ($(wildcard ./src/.*),)
 ifneq ($(CLEAN_FULL),)
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\dist
 else
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path $(BUILD_PATH)
+endif
 endif
 
 
@@ -156,22 +168,38 @@ install: build ## Install Application
 
 
 RUN_ARGS  =
-run: run-$(SHELL_IS) ## Run Application (from source code)
+run: run-$(SHELL_IS) ## Run Application (from source code) (usabled only in app mode)
 
 run-bash:
+ifneq ($(wildcard ./src/.*),)
 	go run ./src/main.go $(RUN_ARGS)
+else
+	@echo "run command is usabled only in 'app' mode
+endif
 
 run-powershell:
+ifneq ($(wildcard ./src/.*),)
 	go run .\src\main.go $(RUN_ARGS)
+else
+	@echo "run command is usabled only in 'app' mode
+endif
 
 
-run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary)
+run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabled only in app mode)
 
 run-binary-bash:
+ifneq ($(wildcard ./src/.*),)
 	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
+else
+	@echo "run command is usabled only in 'app' mode
+endif
 
 run-binary-powershell:
+ifneq ($(wildcard ./src/.*),)
 	.\dist\$(BUILD_OS)\$(BUILD_ARCH)\main.exe $(RUN_ARGS)
+else
+	@echo "run command is usabled only in 'app' mode
+endif
 
 
 uninstall: ## Uninstall Application
@@ -190,7 +218,7 @@ test: test-$(SHELL_IS) ## Run Tests
 
 test-bash:
 	mkdir -p ./.coverage
-	find ./src -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
+	find . -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
 
 # test-powershell:
 # 	$(GO_TEST) .\...
