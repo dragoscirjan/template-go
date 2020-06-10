@@ -87,6 +87,10 @@ else
 endif
 
 
+docs: ## Generate documentation for the Project
+	@echo "Generate documentation for the Project"
+
+
 configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 	$(GIT_CERT_IGNORE_COMMAND)
 	go get -u golang.org/x/lint/golint
@@ -94,6 +98,8 @@ configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
 	go get golang.org/x/tools/cmd/goimports
 
 	go get github.com/fzipp/gocyclo
+
+	go get github.com/robertkrimen/godocdown/godocdown
 
 	go get -t -v ./...
 
@@ -127,14 +133,21 @@ ifeq ($(IN_TRAVIS),)
 	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
 endif
 
+MODE = mod
+# MODE = app
 init: init-$(SHELL_IS)
 	go mod init $(PROJECT_PREFIX)/$(PROJECT)
 
 init-bash:
 	rm -rf go.mod
+ifeq ($(MODE),mod)
+	cp -rdf .mod/* .; rm -rf .mod
+else
+	mv .app src
+endif
 
 init-powershell:
-	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init -Mode $(MODE)
 
 
 install: build ## Install Application
