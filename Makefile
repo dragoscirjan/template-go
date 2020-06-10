@@ -99,8 +99,13 @@ endif
 endif
 
 
+GODOCMOD_OPTIONS =
 docs: ## Generate documentation for the Project
-	@echo "Generate documentation for the Project"
+ifneq ($(wildcard ./src/.*),)
+	godocdown.exe $(GODOCMOD_OPTIONS) ./src > docs.md
+else
+	godocdown.exe $(GODOCMOD_OPTIONS) . > docs.md
+endif
 
 
 configure: configure-$(SHELL_IS) ## Configure and Init the code dependencies
