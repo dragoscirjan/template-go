@@ -52,7 +52,7 @@ GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_F
 # Instructions
 #
 
-build: test clean build-$(SHELL_IS) ## Build Application BUILD_OS=? BUILD_ARCH=? #$(BUILD_SRC) (usabled only in app mode)
+build: test clean docs build-$(SHELL_IS) ## Build Application BUILD_OS=? BUILD_ARCH=? #$(BUILD_SRC) (usabled only in app mode)
 
 build-run:
 ifneq ($(wildcard ./src/.*),)
