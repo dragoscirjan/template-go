@@ -140,6 +140,7 @@ init: init-$(SHELL_IS)
 
 init-bash:
 	rm -rf go.mod
+	rm -rf go.sum
 ifeq ($(MODE),mod)
 	cp -rdf .mod/* .; rm -rf .mod
 else

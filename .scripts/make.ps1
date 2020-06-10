@@ -1,5 +1,6 @@
 param(
   [Parameter(Mandatory = $True)][System.String]$Action = '',
+  [System.String]$Mode = 'mod', # can be app|mod
   [System.String]$Path = '', # used for mkdir
   [System.String]$ArgumentList = '',
   [System.String]$Command = '',
@@ -54,6 +55,16 @@ function GoConfigure() {
 function GoInit() {
   if (Test-Path ".\go.mod" -PathType Leaf) {
     Remove-Item -Path .\go.mod -Force;
+    try {
+      Remove-Item -Path .\go.sum -Force;
+    }
+    catch { }
+  }
+  if ($Mode -eq 'mod') {
+    Copy-Item -Path .\.mod\* -Destination .
+  }
+  else {
+    Rename-Item -Path .\.app -NewName .\src
   }
 }
 
