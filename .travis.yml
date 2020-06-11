@@ -2,8 +2,8 @@ language: go
 go_import_path: github.com/templ-project/go
 os:
   - linux
-  - osx
-  - windows
+  # - osx
+  # - windows
 go:
   # - 1.12.x
   # - 1.13.x
@@ -23,9 +23,13 @@ before_script:
   - make configure IN_TRAVIS=1
 scripts:
   - bash .scripts/pre-commit.sh --all
-  - make build
-  - make run
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
+  - if [[ $MODE == 'app' ]]; then
+    make build;
+    make run;
+    if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin;
+    else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi;
+    else make test;
+    fi
 after_script:
   - if [[ $TRAVIS_NODE_VERSION == '12' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]]; then make docs;
     sonar-scanner; fi
