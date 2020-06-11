@@ -23,20 +23,11 @@ before_script:
   - make configure IN_TRAVIS=1
 scripts:
   - bash .scripts/pre-commit.sh --all
-  - if [[ "$MODE" = "app" ]]; then make build;
-    else make test;
-    fi
-  - if [[ "$MODE" == "app" ]]; then make run;
-    else echo "Mode 'mod' has no run command";
-    fi
-  - if [[ "$MODE" == "app" ]]; then
-    if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi;
-    else echo "Mode 'mod' has no run command";
-    fi
-  - make docs
+  - make build
+  - make run
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
 after_script:
-  - if [[ $TRAVIS_GO_VERSION == '1.14.x' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $MODE == 'mod' ]]; then npm run docs;
-    sonar-scanner; fi
+  - test $TRAVIS_GO_VERSION == '1.14.x' && test $TRAVIS_OS_NAME == 'linux' && sonar-scanner
 notifications:
   email:
     recipients:
@@ -45,6 +36,6 @@ notifications:
     on_failure: always
 addons:
   sonarcloud:
-    organization: templ-project
+    organization: "templ-project"
     token:
-      secure: Y7IiP7SCr+4JMSbGTQWu+2Oya2hFuPpcRbQ70xJI6UZxn8opvI5NJ/+Ui7xRJPBguI0i8XKwnFJTz4+iPanpFoBF5XSdGcNrGjhmgZjmbBR0zugPpPrjvG7fP2RyLXFVRoQZp8k7ZCnLc6CHILloMs4JoEAH3mxehdWzzdDQ1TeOS60lhLt95yYGsUBXPYB6WRngD37nvJdzIkCmCrLlc4kGcMcEg9dp6vDhuDTLV8FUlF9EtopmG/BWS38x3iyoqRqzw/h8K83eicDybZLGz8BohKTJMA+a7hrbdDtx5NoPTQ8T7i2xy7oJEda4f6s5opKXtR/Mxt8K2P1vPnlXgOjlT/LKEOC5Ym2TjgThOS5KiK1PLnwRWFWEnXXQclZnTdJNLLwhD13cy2cNgWGZnh7wh7hiGqr/0CZGn38PPeFOsAdl6DUMDV1XZVDbmnDTYwqF8N6gwbBdNJ5K4PHdn2/P71HopWQtVgQSzvA5HU2Qy1IodglRLmzcJMqZ8lDBsF/QISLR+5GEShSbXsKx8UJ7rpylSKqe6qjWMHiI9NaPEAJC0wLXF91XnbLz7WtC6fw0fbjbXM/Dr3EI8gzU1Bixc1rE+nqaY6onjXAEQw6Kb24zkqyAwiHgJKUI3O2SpJUUJrV3ZV2vdAvGGNlEcd8M/M60XLyh9LBXMlP9vzw=
+      secure: "WlxoMMZGNpv/IQCqBXNLJClQkL2rseP8mclRRJh4N60bfhhsS58xwyh/KHUjpDN+7zZG/bP/v1L/1CDU7loLnsQPB2f8UeNecukaYx12dRixkKm2WiWXbQHDweZdFpDq/F5dqmbCsDC+LTmaBmhlddJCafXgXM8pVEXYAHZx6A+YluTDAOPE1MMEZlgpjB32sLnMFPiSeW2Ov9WtoTigIG2jpvoBXKJztcTXdn8QdKoxK+19nkReA3UxKHhajMt/xo9+85sqtRXyIumuk0x6iP0256SyjidOY/joQiD9GmmJLPILkWjEH/I6q0Z4eHutiGDwdZ2PCnmcF+cQB2qPssnl+JxHXQcKeFp05aa7GSDGyJezLCPbbX0c1tZZmHP/qKuwFyIK8QRbkwy9+7A5a2sY+YQOqZI8UO5kBmI9uEKF32ofIu/Nnz1BWobHcytWRclK34Cdd1MGFLRBA34j9TpiyuSIGG6bDxei+QVm80QF9MpX86kJm+Z9VoSL0VJZMs17osy1nF1xTBKlrEaOjA/BVRRzYoYvxF8XUFUd76FB5GrcGwNJD5V8C6G6Mn/ihF2SyQlOQkl3aAmuqY8pJIIFQLGhT1DD1p9UjB+h4TTlmq30lbMi9PPgQSzKihIm6/JVBLcoyuQZW4hNPKmYq6fa7/S2CfPMFi4pLwjVcDQ="
