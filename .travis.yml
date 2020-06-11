@@ -31,7 +31,7 @@ scripts:
     else make test;
     fi
 after_script:
-  - if [[ $TRAVIS_NODE_VERSION == '12' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]]; then make docs;
+  - if [[ $TRAVIS_GO_VERSION == '1.14.x' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $MODE == 'mod' ]]; then make docs;
     sonar-scanner; fi
 notifications:
   email:
