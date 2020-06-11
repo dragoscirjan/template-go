@@ -6,7 +6,7 @@ os:
   - windows
 go:
   # - 1.12.x
-  - 1.13.x
+  # - 1.13.x
   - 1.14.x
   # - master
 env:
@@ -34,8 +34,9 @@ scripts:
     else echo "Mode 'mod' has no run command";
     fi
   - make docs
-# after_script:
-#   - test $TRAVIS_NODE_VERSION == '12' && sonar-scanner
+after_script:
+  - if [[ $TRAVIS_GO_VERSION == '1.14.x' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $MODE == 'mod' ]]; then npm run docs;
+    sonar-scanner; fi
 notifications:
   email:
     recipients:

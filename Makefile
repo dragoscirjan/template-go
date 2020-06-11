@@ -15,10 +15,19 @@ init-bash:
 	rm -rf go.mod
 	rm -rf go.sum
 ifeq ($(MODE),mod)
-	cp -rdf .mod/* .; rm -rf .mod
+	cp .mod/* .
 else
 	mv .app src
 endif
+	rm -rf .app .mod
 
 init-powershell:
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init -Mode $(MODE)
+ifeq ($(MODE),mod)
+	cp .mod/* .
+else
+	mv .app src
+endif
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\.app
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\.mod
+

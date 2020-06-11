@@ -79,7 +79,7 @@ function GoRmDir() {
   param(
     [Parameter(Mandatory = $True)][System.String]$Path
   )
-  if (Test-Path ".\dist" -PathType Container) {
+  if (Test-Path $Path -PathType Container) {
     Remove-Item -Path $Path -Recurse -Force;
   }
 }
