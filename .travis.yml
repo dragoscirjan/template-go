@@ -43,9 +43,8 @@ notifications:
       - dragos.cirjan@gmail.com
     on_success: never
     on_failure: always
-# addons:
-#   sonarcloud:
-#     organization: "organisation"
-#     token:
-#       secure: "secure"
-
+addons:
+  sonarcloud:
+    organization: templ-project
+    token:
+      secure: Y7IiP7SCr+4JMSbGTQWu+2Oya2hFuPpcRbQ70xJI6UZxn8opvI5NJ/+Ui7xRJPBguI0i8XKwnFJTz4+iPanpFoBF5XSdGcNrGjhmgZjmbBR0zugPpPrjvG7fP2RyLXFVRoQZp8k7ZCnLc6CHILloMs4JoEAH3mxehdWzzdDQ1TeOS60lhLt95yYGsUBXPYB6WRngD37nvJdzIkCmCrLlc4kGcMcEg9dp6vDhuDTLV8FUlF9EtopmG/BWS38x3iyoqRqzw/h8K83eicDybZLGz8BohKTJMA+a7hrbdDtx5NoPTQ8T7i2xy7oJEda4f6s5opKXtR/Mxt8K2P1vPnlXgOjlT/LKEOC5Ym2TjgThOS5KiK1PLnwRWFWEnXXQclZnTdJNLLwhD13cy2cNgWGZnh7wh7hiGqr/0CZGn38PPeFOsAdl6DUMDV1XZVDbmnDTYwqF8N6gwbBdNJ5K4PHdn2/P71HopWQtVgQSzvA5HU2Qy1IodglRLmzcJMqZ8lDBsF/QISLR+5GEShSbXsKx8UJ7rpylSKqe6qjWMHiI9NaPEAJC0wLXF91XnbLz7WtC6fw0fbjbXM/Dr3EI8gzU1Bixc1rE+nqaY6onjXAEQw6Kb24zkqyAwiHgJKUI3O2SpJUUJrV3ZV2vdAvGGNlEcd8M/M60XLyh9LBXMlP9vzw=
