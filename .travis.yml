@@ -23,15 +23,15 @@ before_script:
   - make configure IN_TRAVIS=1
 scripts:
   - bash .scripts/pre-commit.sh --all
-  - if [[ "$MODE" = "app" ]]; then make build; \
-    else make test; \
+  - if [[ "$MODE" = "app" ]]; then make build;
+    else make test;
     fi
-  - if [[ "$MODE" == "app" ]]; then make run; \
-    else echo "Mode 'mod' has no run command"; \
+  - if [[ "$MODE" == "app" ]]; then make run;
+    else echo "Mode 'mod' has no run command";
     fi
-  - if [[ "$MODE" == "app" ]]; then \
-    if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi; \
-    else echo "Mode 'mod' has no run command"; \
+  - if [[ "$MODE" == "app" ]]; then
+    if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi;
+    else echo "Mode 'mod' has no run command";
     fi
   - make docs
 # after_script:
