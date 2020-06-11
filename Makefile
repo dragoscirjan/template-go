@@ -9,7 +9,7 @@ MODE = mod
 # MODE = app
 init: init-$(SHELL_IS) ##
 	go mod init $(PROJECT_PREFIX)/$(PROJECT)
-	echo "include Makefile.$(MODE).template" > Makefile
+	echo include Makefile.$(MODE).template > Makefile
 
 init-bash:
 	rm -rf go.mod
