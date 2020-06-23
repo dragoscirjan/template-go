@@ -41,6 +41,7 @@
 
 - [GoLang Project](#golang-project)
   - [Getting Started](#getting-started)
+    - [Prereqiusites / Dependencies](#prereqiusites--dependencies)
       - [Known Issues / Troubleshooting](#known-issues--troubleshooting)
     - [Installation](#installation)
     - [Development](#development)
@@ -58,6 +59,8 @@
 <!-- /TOC -->
 
 ## Getting Started
+
+### Prereqiusites / Dependencies
 
 #### Known Issues / Troubleshooting
 
