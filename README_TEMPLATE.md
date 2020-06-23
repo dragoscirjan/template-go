@@ -1,8 +1,6 @@
 # GoLang Project
 
-<!-- 
 Set of shield/badges explaining where to find more information about the project (i.e. Where to look for unit test reports, where to see code coverage and code scans, etc.). You can find a lot of them on https://shields.io/)
--->
 
 ![Go Version](https://img.shields.io/badge/go-1.13%7C1.14-blue)
 [![TravisCI](https://travis-ci.org/templ-project/go.svg?branch=master)](https://travis-ci.org/templ-project/go)
