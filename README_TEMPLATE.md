@@ -1,21 +1,11 @@
 # GoLang Project
 
-<img alt="GoLang logo" src="https://github.com/templ-project/go/blob/master/Go-Logo_Blue.png?raw=true" width="20%" align="right" />
-
-> **go** is a template project, designed by [Templ Project](http://templ-project.github.io).
->
-> **go** includes instructions for initializing a new [Go Lang](https://golang.org) project, and configuring it for
-> development, unit testing as well as code linting and analysis.
->
-> **go** implements:
->
-> - [gocyclo](https://github.com/fzipp/gocyclo), [go-critic](https://github.com/go-critic/go-critic) for code analisys
-> - [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports), [gofmt](https://golang.org/cmd/gofmt) for code formatting
-> - [golangci-lint](https://github.com/golangci/golangci-lint), [golint](https://github.com/golang/lint) for linting
+Set of shield/badges explaining where to find more information about the project (i.e. Where to look for unit test reports, where to see code coverage and code scans, etc.). You can find a lot of them on https://shields.io/)
 
 ![Go Version](https://img.shields.io/badge/go-1.13%7C1.14-blue)
 [![TravisCI](https://travis-ci.org/templ-project/go.svg?branch=master)](https://travis-ci.org/templ-project/go)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/templ-project/go/issues)
+
 <!-- [![CircleCI](https://circleci.com/gh/templ-project/go.svg?style=shield)](https://circleci.com/gh/templ-project/go) -->
 
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=templ-project_go&metric=alert_status)](https://sonarcloud.io/dashboard?id=templ-project_go)
@@ -37,16 +27,28 @@
 [![Buy an item on our wishlist for us](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://dragoscirjan.me/wishlist)
 -->
 
+One Paragraph of project description goes here
+
+<!--
+Insert Table of Contents Here
+This can be done using [AlanWalk.markdown-toc](https://marketplace.visualstudio.com/items?itemName=AlanWalk.markdown-toc) plugin,
+which is also included in
+[itmcdev.generic-extension-pack](https://marketplace.visualstudio.com/items?itemName=itmcdev.generic-extension-pack) extension pack.
+-->
 <!-- TOC -->
 
 - [GoLang Project](#golang-project)
   - [Getting Started](#getting-started)
     - [Prereqiusites / Dependencies](#prereqiusites--dependencies)
+      - [For Windows](#for-windows)
+      - [For Linux](#for-linux)
       - [Known Issues / Troubleshooting](#known-issues--troubleshooting)
     - [Installation](#installation)
+      - [Say what the step will be](#say-what-the-step-will-be)
+      - [And repeat](#and-repeat)
     - [Development](#development)
       - [Requirements](#requirements)
-        - [For Windows](#for-windows)
+        - [For Windows](#for-windows-1)
         - [For Linux/Unix/OSX](#for-linuxunixosx)
     - [Testing](#testing)
       - [Single Tests](#single-tests)
@@ -62,35 +64,42 @@
 
 ### Prereqiusites / Dependencies
 
+#### For Windows
+
+```powershell
+# Give Examples
+```
+
+#### For Linux
+
+```bash
+# Give Examples
+
+apt-get install build-essential mono
+npm install -y node-gyp
+```
+
 #### Known Issues / Troubleshooting
 
 - When developing, [golangci-lint](https://github.com/golangci/golangci-lint) will not be available on Windows.
 
 ### Installation
 
-- Clone the package, remove `.git` folder, and re-initialize git to your own project
+A step by step series of examples that tell you how to get a development env running
+
+#### Say what the step will be
 
 ```
-git clone 
-cd project_name
-rm -rf .git
-git init
-git remote add origin https://github.com/your-user/your-project
+Give the example
 ```
 
-- Use `make init` to initialize your project
+#### And repeat
 
-```powershell
-make init PROJECT_PREFIX=github.com/your-organisation PROJECT=your_project
+```
+until finished
 ```
 
-- If you're targeting to write an application and not a module, use `make init MODE=app`
-
-```powershell
-make init MODE=app PROJECT_PREFIX=github.com/your-organisation PROJECT=your_project
-```
-
-- Run `make configure` to configure project
+End with an example of getting some data out of the system or using it for a little demo
 
 ### Development
 
