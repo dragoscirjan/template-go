@@ -11,6 +11,9 @@ init: init-$(SHELL_IS) ##
 	go mod init $(PROJECT_PREFIX)/$(PROJECT)
 	echo include Makefile.$(MODE).include > Makefile
 
+	rm README.md
+	cp README_TEMPLATE.md README.md
+
 init-bash:
 	rm -rf go.mod
 	rm -rf go.sum
