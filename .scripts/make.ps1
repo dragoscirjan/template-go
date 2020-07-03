@@ -61,8 +61,7 @@ function GoInit() {
   }
   if ($Mode -eq 'mod') {
     Copy-Item -Path .\.mod\* -Destination .
-  }
-  else {
+  } else {
     Rename-Item -Path .\.app -NewName .\src
   }
 }
