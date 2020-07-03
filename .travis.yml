@@ -22,15 +22,14 @@ before_script:
   - make init MODE=$MODE
   - make configure IN_TRAVIS=1
 scripts:
+  - set -ex
   - bash .scripts/pre-commit.sh --all
-  - if [[ $MODE == 'app' ]]; then
-    make run;
+  - if [[ $MODE == 'app' ]]; then make run;
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin;
     else make run-binary BUILD_OS=$TRAVIS_OS_NAME;
     fi;
     else make test;
     fi
-after_script:
   - if [[ $TRAVIS_GO_VERSION == '1.14.x' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $MODE == 'mod' ]]; then make docs;
     sonar-scanner; fi
 notifications:
