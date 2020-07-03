@@ -22,7 +22,7 @@ before_script:
   - make init MODE=$MODE
   - make configure IN_TRAVIS=1
 scripts:
-  - set -ex
+  - set -e
   - bash .scripts/pre-commit.sh --all
   - if [[ $MODE == 'app' ]]; then make run;
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin;
