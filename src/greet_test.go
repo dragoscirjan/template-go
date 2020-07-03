@@ -1,4 +1,4 @@
-package greet
+package src
 
 import (
 	"testing"

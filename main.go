@@ -18,9 +18,6 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/templ-project/go/src/pkg/greet"
-	"github.com/templ-project/go/src/pkg/ver"
 )
 
 func main() {
