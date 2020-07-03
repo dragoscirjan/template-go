@@ -95,10 +95,11 @@ run-powershell:
 	go run .\main.go $(RUN_ARGS)
 
 
-run-binary: build ## Run Application (from binary) (usabled only in app mode)
-	make run-binary-$(SHELL_IS) BUILD_OS=$(BUILD_OS) BUILD_ARCH=$(BUILD_ARCH) RUN_ARGS=$(RUN_ARGS)
+run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabled only in app mode)
 
 run-binary-bash:
+	tree dist
+	sleep 5
 	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
 
 run-binary-powershell:
