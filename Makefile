@@ -22,6 +22,6 @@ endif
 	rm -rf .app .mod
 
 init-powershell:
-	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init -Mode $(MODE)
+	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Init -Mode $(MODE) -Project $(PROJECT_PREFIX)/$(PROJECT)
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\.mod
 
