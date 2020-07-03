@@ -55,14 +55,14 @@ function GoConfigure() {
 
 function GoInit() {
   if (Test-Path ".\go.mod" -PathType Leaf) {
-    Remove-Item -Path .\go.mod -Force;
+    Remove-Item -Path .\go.mod  -Recurse -Force
     if (Test-Path -Path .\go.sum -PathType Leaf) {
-      Remove-Item -Path .\go.sum -Force;
+      Remove-Item -Path .\go.sum  -Recurse -Force
     }
   }
   if ($Mode -eq 'mod') {
-    Copy-Item -Path .\src\* -Destination .
-    Remove-Item -Path .\main.go,.\src
+    Copy-Item -Path .\src\* -Destination . -Recurse -Force
+    Remove-Item -Path .\main.go,.\src -Recurse -Force
   } else {
     Get-ChildItem -Path .\src -Recurse -File |
       Select-String -Pattern "github.com/templ-project/go" |
