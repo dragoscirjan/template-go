@@ -99,7 +99,9 @@ run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabl
 
 run-binary-bash:
 	sleep 5
-	tree dist
+	ls -la dist
+	ls -la dist/$(BUILD_OS)
+	ls -la dist/$(BUILD_OS)/$(BUILD_ARCH)
 	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
 
 run-binary-powershell:
