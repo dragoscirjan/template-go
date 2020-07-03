@@ -79,19 +79,19 @@ GO_COVERAGE=go tool cover $(GO_COVERAGE_FLAGS)
 test: test-$(SHELL_IS) ## Run Tests
 	$(GO_COVERAGE)
 
-# test-bash:
-# 	$(GO_TEST) ./...
-
 test-bash:
-	mkdir -p ./.coverage
-	find . -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
+	$(GO_TEST) ./...
 
-# test-powershell:
-# 	$(GO_TEST) .\...
+# test-bash:
+# 	mkdir -p ./.coverage
+# 	find . -iname "*_test.go" | while read f; do echo $$(dirname $$f)/...; done | uniq | xargs $(GO_TEST)
 
 test-powershell:
-	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path .\.coverage
-	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Test -Command "$(GO_TEST)"
+	$(GO_TEST) .\...
+
+# test-powershell:
+# 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action MkDir -Path .\.coverage
+# 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action Test -Command "$(GO_TEST)"
 
 
 TEST_PATH=./...
