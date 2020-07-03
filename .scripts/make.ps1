@@ -61,10 +61,9 @@ function GoInit() {
     }
   }
   if ($Mode -eq 'mod') {
-    Copy-Item -Path .\.mod\* -Destination .
+    Copy-Item -Path .\src\* -Destination .
+    Remove-Item -Path .\main.go,.\src
   } else {
-    Rename-Item -Path .\.app -NewName .\src
-
     Get-ChildItem -Path .\src -Recurse -File |
       Select-String -Pattern "github.com/templ-project/go" |
       Select-Object -Unique Path | ForEach-Object {
