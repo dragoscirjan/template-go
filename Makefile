@@ -28,6 +28,5 @@ ifeq ($(MODE),mod)
 else
 	$(POWERSHELL) -Command "Rename-Item -Path .\.app  -NewName mod"
 endif
-	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\.app
 	$(POWERSHELL) -File ./.scripts/make.ps1 -Action RmDir -Path .\.mod
 
