@@ -12,15 +12,17 @@ BUILD_VERSION = $(shell git for-each-ref refs/tags --sort=-taggerdate --format='
 ifeq ($(BUILD_VERSION),)
 BUILD_VERSION=none
 endif
-BUILD_COMMIT = $(shell git log --format="%h" -n 1)
 
-BUILD_DATE = $(shell date --utc)
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
 BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
 BUILD_SRC = ./main.go
 BUILD_BIN = $(BUILD_PATH)/main
 ifeq ($(OSFLAG),WIN32)
+BUILD_COMMIT = $(shell $(POWERSHELL) -Command 'git log --format="%h" -n 1')
 BUILD_DATE = $(shell $(POWERSHELL) -Command 'Get-Date -Format "yyyyMMddHHmmss"')
+else
+BUILD_COMMIT = $(shell git log --format="%h" -n 1)
+BUILD_DATE = $(shell date --utc)
 endif
 
 ifeq ($(BUILD_OS),windows)
