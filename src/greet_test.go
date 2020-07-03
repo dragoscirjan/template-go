@@ -1,4 +1,4 @@
-package src
+package greet
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAbs(t *testing.T) {
+func TestHello(t *testing.T) {
 	a := assert.New(t)
 	hello := Hello("John")
 
