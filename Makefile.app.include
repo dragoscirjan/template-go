@@ -102,6 +102,7 @@ run-binary-bash:
 	ls -la dist
 	ls -la dist/$(BUILD_OS)
 	ls -la dist/$(BUILD_OS)/$(BUILD_ARCH)
+	chmod 755 ./dist/$(BUILD_OS)/$(BUILD_ARCH)/main
 	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
 
 run-binary-powershell:
