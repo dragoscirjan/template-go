@@ -12,7 +12,7 @@ BUILD_VERSION = $(shell git for-each-ref refs/tags --sort=-taggerdate --format='
 ifeq ($(BUILD_VERSION),)
 BUILD_VERSION=none
 endif
-BUILD_COMMIT = $(shell git log --format="%%h" -n 1)
+BUILD_COMMIT = $(shell git log --format="%h" -n 1)
 
 BUILD_DATE = $(shell date --utc)
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
@@ -29,9 +29,9 @@ else
 	BUILD_EXT =
 endif
 
-BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT).VersionName=$(BUILD_VERSION)
-BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT).GitCommit=$(BUILD_COMMIT)
-BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT).BuildDate=$(BUILD_DATE)
+BUILD_VERSION_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.VersionName=$(BUILD_VERSION)
+BUILD_COMMIT_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.GitCommit=$(BUILD_COMMIT)
+BUILD_DATE_FLAG = $(PROJECT_PREFIX)/$(PROJECT)/src.BuildDate=$(BUILD_DATE)
 
 GO := GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH) go build -trimpath
 GO_LDFLAGS = -X $(BUILD_VERSION_FLAG) -X $(BUILD_COMMIT_FLAG) -X '$(BUILD_DATE_FLAG)'
