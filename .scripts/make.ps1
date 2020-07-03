@@ -66,12 +66,12 @@ function GoInit() {
     Rename-Item -Path .\.app -NewName .\src
 
     Get-ChildItem -Path .\src -Recurse -File |
-      Select-String -Pattern "github.com/templ-project/go" #|
-      # Select-Object -Unique Path | ForEach-Object {
-      #   (Get-Content $_.Path) |
-      #     Foreach-Object {$_ -replace 'hello', $Project}  |
-      #     Out-File $_.Path
-      # }
+      Select-String -Pattern "github.com/templ-project/go" |
+      Select-Object -Unique Path | ForEach-Object {
+        (Get-Content $_.Path) |
+          Foreach-Object {$_ -replace 'github.com/templ-project/go', $Project}  |
+          Out-File $_.Path
+      }
   }
 }
 
