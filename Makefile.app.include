@@ -98,8 +98,8 @@ run-powershell:
 run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabled only in app mode)
 
 run-binary-bash:
-	tree dist
 	sleep 5
+	tree dist
 	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
 
 run-binary-powershell:
