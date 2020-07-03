@@ -120,7 +120,7 @@ for FILE in $STAGED_GO_FILES; do
 
     # # Run golangci-lint on the staged file and check the exit status
     COMMAND="$GOLANGCILINT run $FILE"
-    printf "\t\e[33;90m%s\e[m ... ($MACHINE_OS)" "$COMMAND"
+    printf "\t\e[33;90m%s\e[m ... " "$COMMAND"
     if [[ "$MACHINE_OS" != "Windows" ]]; then
         $COMMAND #&> /tmp/__pre_commit_go__
         if [[ $? == 1 ]]; then
