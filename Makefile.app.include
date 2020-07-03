@@ -98,7 +98,8 @@ run-powershell:
 run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabled only in app mode)
 
 run-binary-bash:
-	if [[ -f ./dist/$(BUILD_OS)/$(BUILD_ARCH)/main ]]; then ./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS); else echo "./dist/$(BUILD_OS)/$(BUILD_ARCH)/main did not compile"; exit 1; fi
+	ls -la ./dist/$(BUILD_OS)/$(BUILD_ARCH)
+	./dist/$(BUILD_OS)/$(BUILD_ARCH)/main $(RUN_ARGS)
 
 run-binary-powershell:
 	.\dist\$(BUILD_OS)\$(BUILD_ARCH)\main.exe $(RUN_ARGS)
