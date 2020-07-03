@@ -24,10 +24,10 @@ before_script:
 scripts:
   - bash .scripts/pre-commit.sh --all
   - if [[ $MODE == 'app' ]]; then
-    make build;
     make run;
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin;
-    else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi;
+    else make run-binary BUILD_OS=$TRAVIS_OS_NAME;
+    fi;
     else make test;
     fi
 after_script:
