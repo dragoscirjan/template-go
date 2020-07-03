@@ -55,10 +55,9 @@ function GoConfigure() {
 function GoInit() {
   if (Test-Path ".\go.mod" -PathType Leaf) {
     Remove-Item -Path .\go.mod -Force;
-    try {
+    if (Test-Path -Path .\go.sum -PathType Leaf) {
       Remove-Item -Path .\go.sum -Force;
     }
-    catch { }
   }
   if ($Mode -eq 'mod') {
     Copy-Item -Path .\.mod\* -Destination .
