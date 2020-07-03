@@ -63,6 +63,14 @@ ifeq ($(IN_TRAVIS),)
 	cd $(shell go env GOPATH)/src/github.com/go-critic/go-critic && make gocritic
 endif
 
+RELEASE_OPTIONS = -Patch -Dry
+release: release-$(SHELL_IS) ## Publish code & mark for release
+
+release-bash:
+	bash ./.scripts/release-tag.sh $(RELEASE_OPTIONS)
+
+release-powershell:
+	$(POWERSHELL) -File ./.scripts/release-tag.ps1 $(RELEASE_OPTIONS)
 
 GO_TEST_FLAGS=-tags=unit -timeout 30s -short -coverprofile=.coverage/coverage -v
 GO_TEST=go test $(GO_TEST_FLAGS)
