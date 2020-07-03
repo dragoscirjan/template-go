@@ -18,10 +18,12 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/templ-project/go/src"
 )
 
 func main() {
-	fmt.Println(greet.Hello("World"))
+	fmt.Println(src.Hello("World"))
 	fmt.Println()
-	ver.ShowVersion()
+	src.ShowVersion()
 }
