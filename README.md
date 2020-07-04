@@ -1,4 +1,4 @@
-# Templ Generic
+# Templ Go
 
 [![HitCount](http://hits.dwyl.com/templ-project/go.svg)](http://hits.dwyl.com/templ-project/go)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/templ-project/go/issues)
