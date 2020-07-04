@@ -6,6 +6,7 @@ case "${unameOut}" in
     Darwin*)    MACHINE_OS=Mac;;
     CYGWIN*)    MACHINE_OS=Windows;;
     MINGW*)     MACHINE_OS=Windows;;
+    MSYS*)      MACHINE_OS=Windows;;
     *)          MACHINE_OS="UNKNOWN:${unameOut}"
 esac
 

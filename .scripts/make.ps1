@@ -9,7 +9,8 @@ param(
   [System.String]$LdFlags = '',
   # [System.String[]]$LdFlags = @(),
   [System.String]$O = '',
-  [System.String]$Src = '.\main.o'
+  [System.String]$Src = '.\main.o',
+  [System.String]$Project = 'github.com/templ-project/go'
 )
 
 function GoBuild() {
@@ -54,17 +55,22 @@ function GoConfigure() {
 
 function GoInit() {
   if (Test-Path ".\go.mod" -PathType Leaf) {
-    Remove-Item -Path .\go.mod -Force;
-    try {
-      Remove-Item -Path .\go.sum -Force;
+    Remove-Item -Path .\go.mod  -Recurse -Force
+    if (Test-Path -Path .\go.sum -PathType Leaf) {
+      Remove-Item -Path .\go.sum  -Recurse -Force
     }
-    catch { }
   }
   if ($Mode -eq 'mod') {
-    Copy-Item -Path .\.mod\* -Destination .
-  }
-  else {
-    Rename-Item -Path .\.app -NewName .\src
+    Copy-Item -Path .\src\* -Destination . -Recurse -Force
+    Remove-Item -Path .\cli,.\src -Recurse -Force
+  } else {
+    Get-ChildItem -Path .\src -Recurse -File |
+      Select-String -Pattern "github.com/templ-project/go" |
+      Select-Object -Unique Path | ForEach-Object {
+        (Get-Content $_.Path) |
+          Foreach-Object {$_ -replace 'github.com/templ-project/go', $Project}  |
+          Out-File $_.Path
+      }
   }
 }
 
