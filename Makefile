@@ -16,7 +16,7 @@ init-bash:
 	rm -rf go.sum
 ifeq ($(MODE),mod)
 	cp src/* .
-	rm -rf main.go src
+	rm -rf cli src
 endif
 	make init-$(OSFLAG)
 

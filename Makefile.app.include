@@ -15,7 +15,7 @@ endif
 
 BUILD_PATH = ./dist/$(BUILD_OS)/$(BUILD_ARCH)
 BUILD_VARS = GOOS=$(BUILD_OS) GOARCH=$(BUILD_ARCH)
-BUILD_SRC = ./main.go
+BUILD_SRC = ./cli/main.go
 BUILD_BIN = $(BUILD_PATH)/main
 ifeq ($(OSFLAG),WIN32)
 BUILD_COMMIT = $(shell $(POWERSHELL) -Command 'git log --format="%h" -n 1')
@@ -53,7 +53,7 @@ build-bash-mkdir:
 	mkdir -p dist/$(BUILD_OS)/$(BUILD_ARCH)
 
 build-powershell: GO = $(POWERSHELL) -File ./.scripts/make.ps1 -Action Build -Command "go build -trimpath" -GoOs $(BUILD_OS) -GoArch $(BUILD_ARCH)
-build-powershell: BUILD_SRC = -Src ./main.go
+build-powershell: BUILD_SRC = -Src ./cli/main.go
 build-powershell: build-powershell-mkdir build-run
 
 build-powershell-mkdir:
@@ -89,10 +89,10 @@ RUN_ARGS  =
 run: run-$(SHELL_IS) ## Run Application (from source code) (usabled only in app mode)
 
 run-bash:
-	go run ./main.go $(RUN_ARGS)
+	go run ./cli/main.go $(RUN_ARGS)
 
 run-powershell:
-	go run .\main.go $(RUN_ARGS)
+	go run ./cli/main.go $(RUN_ARGS)
 
 
 run-binary: build run-binary-$(SHELL_IS) ## Run Application (from binary) (usabled only in app mode)
