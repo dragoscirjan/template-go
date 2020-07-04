@@ -62,7 +62,7 @@ function GoInit() {
   }
   if ($Mode -eq 'mod') {
     Copy-Item -Path .\src\* -Destination . -Recurse -Force
-    Remove-Item -Path .\main.go,.\src -Recurse -Force
+    Remove-Item -Path .\cli,.\src -Recurse -Force
   } else {
     Get-ChildItem -Path .\src -Recurse -File |
       Select-String -Pattern "github.com/templ-project/go" |
